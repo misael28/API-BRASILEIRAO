@@ -6,6 +6,7 @@ const obterRodadas = async () => {
 	};
 
 	const result = await bd.query(query);
+	//console.log(result.rows) 
 	return result.rows;
 };
 

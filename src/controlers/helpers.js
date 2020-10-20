@@ -1,10 +1,7 @@
 const hp = require('../repositories/helpers');
+const hpClass = require('./helpersClassificacao')
 
 const obterRodadas = async (ctx) => {
-	// await biblioteca.criarBiblioteca();
-	// função para obter rodadas
-	//const { rodadas } = ctx.query;
-
 	const rodadas = await hp.obterRodadas();
 
 	ctx.body = {
@@ -25,7 +22,7 @@ const obterJogosRodada = async (ctx) => {
 		ctx.body = { mensagem: 'Pedido mal formatado' };
 	}
 
-	if(id>=39){
+	if (id >= 39) {
 		ctx.status = 400;
 		ctx.body = { mensagem: 'Pedido mal formatado' };
 	}
@@ -39,4 +36,19 @@ const obterJogosRodada = async (ctx) => {
 	ctx.body = { rodada: null };
 };
 
-module.exports = { obterRodadas, obterJogosRodada };
+const obterClassificao = async (ctx) => {
+	let tabela = [];
+	const rodadas = await hp.obterRodadas();
+	
+	hpClass.criarTabela(rodadas, tabela);
+	hpClass.ordenarTabela(tabela)
+
+	ctx.body = {
+		status: 'sucesso',
+		dados: tabela,
+	};
+
+	return;
+};
+
+module.exports = { obterRodadas, obterJogosRodada, obterClassificao };

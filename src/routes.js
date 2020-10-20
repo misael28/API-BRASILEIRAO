@@ -9,4 +9,6 @@ const router = new Router();
 router.get('/rodadas', hp.obterRodadas);
 router.get('/rodada/:id', hp.obterJogosRodada);
 
+router.get('/classificacao', hp.obterClassificao);
+
 module.exports = router;
