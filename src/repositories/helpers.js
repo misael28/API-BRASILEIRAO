@@ -6,7 +6,7 @@ const obterRodadas = async () => {
 	};
 
 	const result = await bd.query(query);
-	//console.log(result.rows) 
+	//console.log(result.rows)
 	return result.rows;
 };
 
@@ -20,4 +20,16 @@ const obterJogosRodada = async (rodada) => {
 	return result.rows;
 };
 
-module.exports = { obterRodadas, obterJogosRodada };
+const editarJogoRodada = async (id, gols_casa, gols_visitante) => {
+	const query = {
+		text: `UPDATE jogos
+		SET gols_casa = $2, gols_visitante=$3 
+		WHERE id=$1
+		RETURNING *;`,
+		values: [id, gols_casa, gols_visitante],
+	};
+	const result = await bd.query(query);
+	return result.rows;
+};
+
+module.exports = { obterRodadas, obterJogosRodada, editarJogoRodada };

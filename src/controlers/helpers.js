@@ -1,5 +1,5 @@
 const hp = require('../repositories/helpers');
-const hpClass = require('./helpersClassificacao')
+const hpClass = require('./helpersClassificacao');
 
 const obterRodadas = async (ctx) => {
 	const rodadas = await hp.obterRodadas();
@@ -39,9 +39,9 @@ const obterJogosRodada = async (ctx) => {
 const obterClassificao = async (ctx) => {
 	let tabela = [];
 	const rodadas = await hp.obterRodadas();
-	
+
 	hpClass.criarTabela(rodadas, tabela);
-	hpClass.ordenarTabela(tabela)
+	hpClass.ordenarTabela(tabela);
 
 	ctx.body = {
 		status: 'sucesso',
@@ -51,4 +51,35 @@ const obterClassificao = async (ctx) => {
 	return;
 };
 
-module.exports = { obterRodadas, obterJogosRodada, obterClassificao };
+const editarJogoRodada = async (ctx) => {
+	const {
+		id = null,
+		gols_casa = null,
+		gols_visitante = null,
+	} = ctx.request.body;
+
+	if (!id || !gols_casa || !gols_visitante) {
+		ctx.status = 400;
+		ctx.body = 'Error';
+	}
+
+	const rodadaModificada = await hp.editarJogoRodada(
+		id,
+		gols_casa,
+		gols_visitante
+	);
+
+	ctx.body = {
+		status: 'sucesso',
+		dados: rodadaModificada,
+	};
+
+	return;
+};
+
+module.exports = {
+	obterRodadas,
+	obterJogosRodada,
+	obterClassificao,
+	editarJogoRodada,
+};
