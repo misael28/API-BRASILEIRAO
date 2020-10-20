@@ -1,16 +1,18 @@
 const Router = require('koa-router');
-const hp = require('./controlers/helpers');
 const router = new Router();
-
+const Jogos = require('./controlers/helpers');
+const Auth = require('./controlers/auth');
+const Session = require("./middlewares/session")
 /**
  * Rotas definidas abaixo
  */
+router.post('/auth', Auth.autenticar);
 
-router.get('/rodadas', hp.obterRodadas);
-router.get('/rodada/:id', hp.obterJogosRodada);
+router.get('/rodadas', Jogos.obterRodadas);
+router.get('/jogos/:rodada', Jogos.obterJogosRodada);
 
-router.get('/classificacao', hp.obterClassificao);
+router.get('/classificacao', Jogos.obterClassificao);
 
-router.post('/editar',hp.editarJogoRodada);
+router.post('/jogos',Session.verify, Jogos.editarJogoRodada);
 
 module.exports = router;

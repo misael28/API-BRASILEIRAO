@@ -13,27 +13,27 @@ const obterRodadas = async (ctx) => {
 };
 
 const obterJogosRodada = async (ctx) => {
-	const { id = null } = ctx.params;
+	const { rodada = null } = ctx.params;
 
-	const rodada = await hp.obterJogosRodada(id);
+	const rodadaJogos = await hp.obterJogosRodada(rodada);
 
-	if (!id) {
+	if (!rodada) {
 		ctx.status = 400;
 		ctx.body = { mensagem: 'Pedido mal formatado' };
 	}
 
-	if (id >= 39) {
+	if (rodada >= 39) {
 		ctx.status = 400;
 		ctx.body = { mensagem: 'Pedido mal formatado' };
 	}
 
-	if (rodada) {
-		ctx.body = { status: 'sucesso', dados: rodada };
+	if (rodadaJogos) {
+		ctx.body = { status: 'sucesso', dados: rodadaJogos };
 		return;
 	}
 
 	ctx.status = 404;
-	ctx.body = { rodada: null };
+	ctx.body = { rodadaJogos: null };
 };
 
 const obterClassificao = async (ctx) => {

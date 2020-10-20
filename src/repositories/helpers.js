@@ -1,5 +1,19 @@
 const bd = require('../utils/database');
 
+const obterAutorPorEmail = async (email = null) => {
+	if (!email) {
+		return null;
+	}
+
+	const query = `SELECT * FROM users WHERE email = $1`;
+	const result = await bd.query({
+		text: query,
+		values: [email],
+	});
+
+	return result.rows.shift();
+};
+
 const obterRodadas = async () => {
 	const query = {
 		text: `SELECT * FROM jogos`,
@@ -32,4 +46,4 @@ const editarJogoRodada = async (id, gols_casa, gols_visitante) => {
 	return result.rows;
 };
 
-module.exports = { obterRodadas, obterJogosRodada, editarJogoRodada };
+module.exports = { obterRodadas, obterJogosRodada, editarJogoRodada, obterAutorPorEmail };

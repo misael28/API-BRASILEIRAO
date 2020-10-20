@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const { Client } = require('pg');
 
 require('dotenv').config();
