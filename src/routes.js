@@ -3,6 +3,7 @@ const router = new Router();
 const Jogos = require('./controlers/helpers');
 const Auth = require('./controlers/auth');
 const Session = require("./middlewares/session")
+
 /**
  * Rotas definidas abaixo
  */
