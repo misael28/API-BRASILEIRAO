@@ -14,13 +14,21 @@ const obterAutorPorEmail = async (email = null) => {
 	return result.rows.shift();
 };
 
+const obterEscudos = async () => {
+	const query = {
+		text: `SELECT * FROM escudos`,
+	};
+
+	const result = await bd.query(query);
+	return result.rows;
+};
+
 const obterRodadas = async () => {
 	const query = {
 		text: `SELECT * FROM jogos`,
 	};
 
 	const result = await bd.query(query);
-	//console.log(result.rows)
 	return result.rows;
 };
 
@@ -46,4 +54,10 @@ const editarJogoRodada = async (id, gols_casa, gols_visitante) => {
 	return result.rows;
 };
 
-module.exports = { obterRodadas, obterJogosRodada, editarJogoRodada, obterAutorPorEmail };
+module.exports = {
+	obterRodadas,
+	obterJogosRodada,
+	editarJogoRodada,
+	obterAutorPorEmail,
+	obterEscudos,
+};

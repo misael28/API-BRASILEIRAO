@@ -13,6 +13,7 @@ router.get('/rodadas', Jogos.obterRodadas);
 router.get('/jogos/:rodada', Jogos.obterJogosRodada);
 
 router.get('/classificacao', Jogos.obterClassificao);
+router.get('/escudos',Jogos.obterEscudos)
 
 router.put('/jogos',Session.verify, Jogos.editarJogoRodada);
 

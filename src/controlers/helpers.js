@@ -12,6 +12,17 @@ const obterRodadas = async (ctx) => {
 	return;
 };
 
+const obterEscudos = async (ctx) => {
+	const escudos = await hp.obterEscudos();
+
+	ctx.body = {
+		status: 'sucesso',
+		dados: escudos,
+	};
+
+	return;
+};
+
 const obterJogosRodada = async (ctx) => {
 	const { rodada = null } = ctx.params;
 
@@ -82,4 +93,5 @@ module.exports = {
 	obterJogosRodada,
 	obterClassificao,
 	editarJogoRodada,
+	obterEscudos,
 };
