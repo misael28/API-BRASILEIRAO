@@ -14,6 +14,6 @@ router.get('/jogos/:rodada', Jogos.obterJogosRodada);
 
 router.get('/classificacao', Jogos.obterClassificao);
 
-router.post('/jogos',Session.verify, Jogos.editarJogoRodada);
+router.put('/jogos',Session.verify, Jogos.editarJogoRodada);
 
 module.exports = router;
